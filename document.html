@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Quiz!</title>
+  <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+        h2 {
+            color: #333;
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 60px;
+            position: relative;
+        }
+        button {
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: transform 0.1s, background-color 0.2s;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #yes-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        #yes-btn:hover {
+            background-color: #27ae60;
+        }
+        #no-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        #no-btn:hover {
+            background-color: #c0392b;
+        }
+        .counter {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 15px;
+        }
+    </style>
+ </head>
+ <body>
+  <div class="quiz-card">
+   <h2 id="question">Loading question...</h2>
+   <div class="btn-container">
+    <button id="yes-btn" onclick="nextQuestion()">Yes</button>
+    <button id="no-btn" onmouseover="removeNo()" onclick="removeNo()" ontouchstart="removeNo()">No</button>
+   </div>
+   <div class="counter" id="counter"></div>
+  </div>
+  <script>
+    const questions = [
+        "Are you annoying?",
+        "Is it true that you stole my snacks?",
+        "Do you secretly agree I'm the favorite sibling?",
+        "Will you make me a sandwich right now?",
+        "Are you going to admit I won this round?",
+        "Do you agree that I am smarter than you?",
+        "Are you going to clean my room today?",
+        "Is it true that I have always been right?"
+    ];
+
+    let currentQuestion = 0;
+
+    function loadQuestion() {
+        if (currentQuestion < questions.length) {
+            document.getElementById("question").innerText = questions[currentQuestion];
+            document.getElementById("no-btn").style.display = "inline-block";
+            document.getElementById("counter").innerText = `Question ${currentQuestion + 1} of ${questions.length}`;
+        } else {
+            document.getElementById("question").innerText = "Thanks for agreeing to everything! 😂
+Saved forever!";
+            document.querySelector(".btn-container").style.display = "none";
+            document.getElementById("counter").innerText = "";
+        }
+    }
+
+    function removeNo() {
+        document.getElementById("no-btn").style.display = "none";
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        loadQuestion();
+    }
+
+    loadQuestion();
+</script>
+ </body>
+</html>
